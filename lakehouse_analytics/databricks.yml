@@ -20,22 +20,26 @@ targets:
     # - Deployed resources get prefixed with '[dev my_user_name]'
     # - Any job schedules and triggers are paused by default.
     # See also https://docs.databricks.com/dev-tools/bundles/deployment-modes.html.
-    mode: development
+    # mode: development
+    presets:
+      name_prefix: dev_
     default: true
     workspace:
       host: https://dbc-c8ac38ea-3fd1.cloud.databricks.com
     variables:
       catalog: dev_lakehouse_analytics_catalog
-      schema: agam-vishnu
+      schema: agam_vishnu
   prod:
     mode: production
+    presets:
+      name_prefix: prod_
     workspace:
       host: https://dbc-c8ac38ea-3fd1.cloud.databricks.com
       # We explicitly deploy to /Workspace/Users/agam.vishnu@outlook.com to make sure we only have a single copy.
       root_path: /Workspace/Users/agam.vishnu@outlook.com/.bundle/${bundle.name}/${bundle.target}
     variables:
-      catalog: dev_lakehouse_analytics_catalog
-      schema: agam-vishnu
+      catalog: prod_lakehouse_analytics_catalog
+      schema: agam_vishnu
     permissions:
       - user_name: agam.vishnu@outlook.com
         level: CAN_MANAGE
